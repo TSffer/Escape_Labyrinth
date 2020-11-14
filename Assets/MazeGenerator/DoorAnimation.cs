@@ -11,7 +11,7 @@ public class DoorAnimation : MonoBehaviour {
     private float toHeight;
 	// Use this for initialization
 	void Start () {
-        trigger = GameObject.Find("FPSController");
+        trigger = GameObject.Find("Personaje");
         initialY = transform.position.y;
 	}
 	
