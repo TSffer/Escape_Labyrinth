@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu_Scene.unity
+    path: Assets/ScapeLabyrinth/Scenes/Menu_Scene.unity
     guid: 829a86ba161cdd840842063447f41aab
   - enabled: 1
-    path: Assets/Scenes/Main_Scene.unity
+    path: Assets/ScapeLabyrinth/Scenes/Main_Scene.unity
     guid: 6bafb380fa5848c4883b823731c2b3f9
   m_configObjects: {}
