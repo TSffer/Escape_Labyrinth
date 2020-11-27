@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         m_IsWalking = false;
         m_RunStepLenghten = 0.0f;
         m_NextStep = m_StepCycle / 2f;
-        m_StepInterval = 0.1f;
+        m_StepInterval = 0.01f;
         for (int i = 0; i < filterLength; i++)
             filterDataQueue.Enqueue(Input.acceleration);
     }
@@ -70,20 +70,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private void ProgressStepCycle(float speed)
-    {
-        if (speed > m_RunStepLenghten)
-        {
-            m_StepInterval += 0.01f;
-        }
-        else if(speed < m_RunStepLenghten)
-        {
-            m_StepInterval -= 0.01f;
-        }
-                
+    {        
         m_StepCycle = m_StepCycle + m_StepInterval;
  
         //m_NextStep = m_StepCycle + m_StepInterval;
-        if(m_StepCycle > 0.3f)
+        if(m_StepCycle > 0.7f)
         {
             int n = Random.Range(1, m_FootstepSounds.Length);
             m_AudioSource.clip = m_FootstepSounds[n];

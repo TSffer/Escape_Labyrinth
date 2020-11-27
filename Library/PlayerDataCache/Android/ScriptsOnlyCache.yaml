@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - DoorAnimation
+    - EnemyIA
     - MGDoor
     - MGMazeRoom
     - MainMenuController
@@ -27,8 +28,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -78,7 +81,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 84
       Script: {instanceID: 0}
@@ -86,14 +95,14 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 90
       Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
     - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
-    - Class: 114
-      Script: {instanceID: 11288}
     - Class: 114
       Script: {instanceID: 11294}
     - Class: 114
@@ -123,14 +132,20 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13012}
     - Class: 114
-      Script: {instanceID: 13412}
+      Script: {instanceID: 13414}
+    - Class: 114
+      Script: {instanceID: 100834}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
     - Class: 136
       Script: {instanceID: 0}
+    - Class: 137
+      Script: {instanceID: 0}
     - Class: 157
+      Script: {instanceID: 0}
+    - Class: 195
       Script: {instanceID: 0}
     - Class: 196
       Script: {instanceID: 0}
@@ -145,6 +160,8 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 238
       Script: {instanceID: 0}
     Assets/ScapeLabyrinth/Scenes/Menu_Scene.unity:
     - Class: 1
@@ -166,6 +183,8 @@ ScriptsOnlyBuild:
     - Class: 48
       Script: {instanceID: 0}
     - Class: 49
+      Script: {instanceID: 0}
+    - Class: 64
       Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
@@ -236,19 +255,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13142}
     - Class: 114
-      Script: {instanceID: 13174}
+      Script: {instanceID: 13176}
     - Class: 114
-      Script: {instanceID: 13288}
+      Script: {instanceID: 13290}
     - Class: 114
-      Script: {instanceID: 13296}
+      Script: {instanceID: 13298}
     - Class: 114
-      Script: {instanceID: 13412}
+      Script: {instanceID: 13414}
     - Class: 114
-      Script: {instanceID: 13428}
+      Script: {instanceID: 13430}
     - Class: 114
-      Script: {instanceID: 49036}
+      Script: {instanceID: 16852}
     - Class: 114
-      Script: {instanceID: 49038}
+      Script: {instanceID: 16854}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -498,7 +517,7 @@ ScriptsOnlyBuild:
     className: BallUserControl
   - hash:
       serializedVersion: 2
-      Hash: 8c24a1d79102fe30478ec7b4ea6cc356
+      Hash: 2a6cfd1f3fa3270671ce1bc39cbc166b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ShowOptions
@@ -1044,7 +1063,7 @@ ScriptsOnlyBuild:
     className: SimpleScript
   - hash:
       serializedVersion: 2
-      Hash: 59acec00fee9219c03d8df6f90f62cc0
+      Hash: 5351abf0ab84ed4d5918c293a842dd6b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -1420,6 +1439,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 5b14ae2134db815cde30be046f4fde84
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyIA
   platform: 13
   scenePathNames:
   - Assets/ScapeLabyrinth/Scenes/Menu_Scene.unity
