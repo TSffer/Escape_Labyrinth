@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - PanelOptions
+  - enemy
   layers:
   - Default
   - TransparentFX

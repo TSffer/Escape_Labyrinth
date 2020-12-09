@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using TMPro;
 using System.Threading;
+using EZCameraShake;
+using System.Globalization;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -30,17 +32,29 @@ public class PlayerController : MonoBehaviour
     private float m_RunStepLenghten;
     private float m_NextStep;
     private float m_StepInterval;
+    private Animator animator;
+    public Text canvastime;
+    public Text canvaslife;
+    private float tmp = 0;
+    private float tmplife = 100.0f;
+    //public AudioClip attackSound;
+    public Transform target;
+    public Camera camera;
+    public GameObject enemy;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         m_AudioSource = GetComponent<AudioSource>();
         m_CharacterController = GetComponent<CharacterController>();
+        animator = GetComponentInChildren<Animator>();
+        //enemy = GameObject.FindGameObjectWithTag("enemy");
+
         m_StepCycle = 0.0f;
         m_IsWalking = false;
         m_RunStepLenghten = 0.0f;
         m_NextStep = m_StepCycle / 2f;
-        m_StepInterval = 0.01f;
+        m_StepInterval = 0.09f;
         for (int i = 0; i < filterLength; i++)
             filterDataQueue.Enqueue(Input.acceleration);
     }
@@ -50,23 +64,57 @@ public class PlayerController : MonoBehaviour
         //speed = -Input.acceleration.z;
         m_RunStepLenghten = speed;
         speed = -LowPassAccelerometer().z;
-        
+
+        tmp += Time.deltaTime;
+        canvastime.text = "Tiempo : " + tmp.ToString("f0");
+
+        if(tmp >= 5.0f)
+        {
+            enemy.SetActive(true);
+        }
+
         if(0.65f > speed)
         {
             speed = -1;
         }
+
+        float dist = Vector3.Distance(target.position, transform.position);
+        if (dist < 5.5f)
+        {
+            Handheld.Vibrate();
+        }
         
-        //Debug.Log(speed);
-        float velocity = speed * 2.5f;
-        rb.velocity = rb.transform.forward * velocity;
-        //Debug.Log(rb.transform.forward);
-        //angle = Input.acceleration.x * 20.0f;
-        angle = LowPassAccelerometer().x * 15.0f;
+        if(tmplife >= 0.0f)
+        {
+            float velocity = speed * 2.5f;
+            rb.velocity = rb.transform.forward * velocity;
+           
+            angle = LowPassAccelerometer().x * 15.0f;
 
-        Vector3 rotation = new Vector3(0.0f, angle, 0.0f);
-        rb.transform.Rotate(rotation);
+            Vector3 rotation = new Vector3(0.0f, angle, 0.0f);
+            rb.transform.Rotate(rotation);
 
-        ProgressStepCycle(speed);
+            ProgressStepCycle(speed);
+        }
+
+        if (dist < 1.5f)
+        {
+            //StartCoroutine(camerashake.Shake(0.15f, 0.4f));
+            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
+            tmplife -= Time.deltaTime*10;
+            canvaslife.text = "Salud : " + tmplife.ToString("f0");
+            if (tmplife <= 0.0f)
+            {
+                speed = 0.0f;
+                tmplife = 0.0f;
+                m_AudioSource.mute = true;
+                transform.rotation = Quaternion.Euler(85.0f, 0.0f, 0.0f);
+                camera.transform.rotation = Quaternion.Euler(-120.0f, 0.0f, 0.0f);
+                //Time.timeScale = 0;
+                SceneManager.LoadScene("Main_Scene");
+            }
+        }
+
     }
 
     private void ProgressStepCycle(float speed)
