@@ -2,7 +2,9 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - DoorAnimation
+    - EZCameraShake.CameraShaker
     - EnemyIA
+    - GoalSuccess
     - MGDoor
     - MGMazeRoom
     - MainMenuController
@@ -28,10 +30,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -108,36 +108,42 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11314}
     - Class: 114
-      Script: {instanceID: 11498}
+      Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11538}
     - Class: 114
-      Script: {instanceID: 11546}
+      Script: {instanceID: 11550}
     - Class: 114
-      Script: {instanceID: 11562}
+      Script: {instanceID: 11566}
     - Class: 114
-      Script: {instanceID: 11644}
+      Script: {instanceID: 11648}
     - Class: 114
-      Script: {instanceID: 11878}
+      Script: {instanceID: 11882}
     - Class: 114
-      Script: {instanceID: 11976}
+      Script: {instanceID: 11982}
     - Class: 114
-      Script: {instanceID: 12296}
+      Script: {instanceID: 12302}
     - Class: 114
-      Script: {instanceID: 12450}
+      Script: {instanceID: 12458}
     - Class: 114
-      Script: {instanceID: 12666}
+      Script: {instanceID: 12678}
     - Class: 114
-      Script: {instanceID: 12792}
+      Script: {instanceID: 12804}
     - Class: 114
-      Script: {instanceID: 12990}
+      Script: {instanceID: 12826}
     - Class: 114
-      Script: {instanceID: 13014}
+      Script: {instanceID: 13006}
     - Class: 114
-      Script: {instanceID: 13416}
+      Script: {instanceID: 13030}
+    - Class: 114
+      Script: {instanceID: 13434}
+    - Class: 114
+      Script: {instanceID: 376984}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
+      Script: {instanceID: 0}
+    - Class: 135
       Script: {instanceID: 0}
     - Class: 136
       Script: {instanceID: 0}
@@ -219,55 +225,55 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11446}
     - Class: 114
-      Script: {instanceID: 11498}
-    - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 11546}
+      Script: {instanceID: 11502}
     - Class: 114
-      Script: {instanceID: 11754}
+      Script: {instanceID: 11550}
     - Class: 114
-      Script: {instanceID: 11834}
+      Script: {instanceID: 11758}
     - Class: 114
-      Script: {instanceID: 11878}
+      Script: {instanceID: 11838}
     - Class: 114
-      Script: {instanceID: 11976}
+      Script: {instanceID: 11882}
     - Class: 114
-      Script: {instanceID: 12012}
+      Script: {instanceID: 11982}
     - Class: 114
-      Script: {instanceID: 12058}
+      Script: {instanceID: 12018}
     - Class: 114
-      Script: {instanceID: 12202}
+      Script: {instanceID: 12064}
     - Class: 114
-      Script: {instanceID: 12538}
+      Script: {instanceID: 12208}
     - Class: 114
-      Script: {instanceID: 12608}
+      Script: {instanceID: 12548}
     - Class: 114
-      Script: {instanceID: 12680}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12694}
+      Script: {instanceID: 12692}
     - Class: 114
-      Script: {instanceID: 12764}
+      Script: {instanceID: 12706}
     - Class: 114
-      Script: {instanceID: 12910}
+      Script: {instanceID: 12776}
     - Class: 114
-      Script: {instanceID: 12990}
+      Script: {instanceID: 12926}
     - Class: 114
-      Script: {instanceID: 13144}
+      Script: {instanceID: 13006}
     - Class: 114
-      Script: {instanceID: 13178}
+      Script: {instanceID: 13160}
     - Class: 114
-      Script: {instanceID: 13292}
+      Script: {instanceID: 13194}
     - Class: 114
-      Script: {instanceID: 13300}
+      Script: {instanceID: 13310}
     - Class: 114
-      Script: {instanceID: 13416}
+      Script: {instanceID: 13318}
     - Class: 114
-      Script: {instanceID: 13432}
+      Script: {instanceID: 13434}
     - Class: 114
-      Script: {instanceID: 570746}
+      Script: {instanceID: 13450}
     - Class: 114
-      Script: {instanceID: 570748}
+      Script: {instanceID: 278960}
+    - Class: 114
+      Script: {instanceID: 278962}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -433,6 +439,12 @@ ScriptsOnlyBuild:
     className: VignetteAndChromaticAberration
   - hash:
       serializedVersion: 2
+      Hash: 0ff4547fb097f640004c63315e051535
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ShakeByDistance
+  - hash:
+      serializedVersion: 2
       Hash: aeb62f729c52c814dec86c47dcac1471
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -449,6 +461,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: SlimUI.ModernMenu
     className: ResetDemo
+  - hash:
+      serializedVersion: 2
+      Hash: 1c16d99756cc8a8e8c88ef29241dfc43
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ShakeOnKeyPress
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -517,7 +535,7 @@ ScriptsOnlyBuild:
     className: BallUserControl
   - hash:
       serializedVersion: 2
-      Hash: f8b06faddcb6d95e1ef156e596bcc990
+      Hash: 2a6cfd1f3fa3270671ce1bc39cbc166b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ShowOptions
@@ -859,7 +877,7 @@ ScriptsOnlyBuild:
     className: ScreenOverlay
   - hash:
       serializedVersion: 2
-      Hash: 5b14ae2134db815cde30be046f4fde84
+      Hash: 7dc3c1fbe123e25b587fdc3432e33bc6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyIA
@@ -869,6 +887,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ShakeOnTrigger
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -941,6 +965,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ShakeDemo
   - hash:
       serializedVersion: 2
       Hash: 34350d15576718c11769ef2ebae6dcdc
@@ -1069,7 +1099,7 @@ ScriptsOnlyBuild:
     className: SimpleScript
   - hash:
       serializedVersion: 2
-      Hash: 354a8fa358421d6902afb7dfee3e37ba
+      Hash: 85b2b89dca3a578a74ee1df5b31f4de4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -1079,6 +1109,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: DynamicShadowSettings
+  - hash:
+      serializedVersion: 2
+      Hash: d86e2f933d0937148eb5601802ebfcff
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: EZCameraShake
+    className: CameraShaker
   - hash:
       serializedVersion: 2
       Hash: 96539fd6feebcbc9da75ce005fd446a9
@@ -1279,6 +1315,12 @@ ScriptsOnlyBuild:
     className: TMPro_InstructionOverlay
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CameraShake
+  - hash:
+      serializedVersion: 2
       Hash: 34665528cf8da97e082a230c8afb96c6
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.ImageEffects
@@ -1445,6 +1487,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 9b4071cb9ea601a9308f9f295917c197
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GoalSuccess
   platform: 13
   scenePathNames:
   - Assets/ScapeLabyrinth/Scenes/Menu_Scene.unity

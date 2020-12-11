@@ -32,29 +32,31 @@ public class PlayerController : MonoBehaviour
     private float m_RunStepLenghten;
     private float m_NextStep;
     private float m_StepInterval;
-    private Animator animator;
+    //private Animator animator;
     public Text canvastime;
     public Text canvaslife;
-    private float tmp = 0;
+    private float tmp = 0.0f;
     private float tmplife = 100.0f;
+    private bool hit = false;
     //public AudioClip attackSound;
     public Transform target;
     public Camera camera;
     public GameObject enemy;
+    public Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         m_AudioSource = GetComponent<AudioSource>();
         m_CharacterController = GetComponent<CharacterController>();
-        animator = GetComponentInChildren<Animator>();
+        //animator = GetComponentInChildren<Animator>();
         //enemy = GameObject.FindGameObjectWithTag("enemy");
 
         m_StepCycle = 0.0f;
         m_IsWalking = false;
         m_RunStepLenghten = 0.0f;
         m_NextStep = m_StepCycle / 2f;
-        m_StepInterval = 0.09f;
+        m_StepInterval = 0.03f;
         for (int i = 0; i < filterLength; i++)
             filterDataQueue.Enqueue(Input.acceleration);
     }
@@ -66,9 +68,9 @@ public class PlayerController : MonoBehaviour
         speed = -LowPassAccelerometer().z;
 
         tmp += Time.deltaTime;
-        canvastime.text = "Tiempo : " + tmp.ToString("f0");
+        canvastime.text = "Tiempo : " + tmp.ToString("f0") + " sec";
 
-        if(tmp >= 5.0f)
+        if(tmp >= 10.0f)
         {
             enemy.SetActive(true);
         }
@@ -79,7 +81,7 @@ public class PlayerController : MonoBehaviour
         }
 
         float dist = Vector3.Distance(target.position, transform.position);
-        if (dist < 5.5f)
+        if (dist < 3.0f && tmp >= 10.0f)
         {
             Handheld.Vibrate();
         }
@@ -97,9 +99,9 @@ public class PlayerController : MonoBehaviour
             ProgressStepCycle(speed);
         }
 
-        if (dist < 1.5f)
+        if (dist < 1.5f && tmp >= 10.0f && hit == false)
         {
-            //StartCoroutine(camerashake.Shake(0.15f, 0.4f));
+            //StartCoroutine(camerashake.Shake(0.15f, 0.4f)); 
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
             tmplife -= Time.deltaTime*10;
             canvaslife.text = "Salud : " + tmplife.ToString("f0");
@@ -108,13 +110,25 @@ public class PlayerController : MonoBehaviour
                 speed = 0.0f;
                 tmplife = 0.0f;
                 m_AudioSource.mute = true;
-                transform.rotation = Quaternion.Euler(85.0f, 0.0f, 0.0f);
-                camera.transform.rotation = Quaternion.Euler(-120.0f, 0.0f, 0.0f);
+                transform.rotation = Quaternion.Euler(80.0f, 0.0f, 0.0f);
+                camera.transform.rotation = Quaternion.Euler(-150.0f, 0.0f, 0.0f);
                 //Time.timeScale = 0;
                 SceneManager.LoadScene("Main_Scene");
             }
         }
 
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+            if (hit == true)
+            {
+                Debug.Log("Hit in player");
+                hit = false;
+            }
+        }
     }
 
     private void ProgressStepCycle(float speed)
@@ -132,6 +146,12 @@ public class PlayerController : MonoBehaviour
             m_FootstepSounds[0] = m_AudioSource.clip;
             m_StepCycle = 0.0f;
         }
+    }
+
+    public void attack()
+    {
+        animator.SetTrigger("Attack");
+        hit = true;
     }
 
     public Vector3 LowPassAccelerometer()

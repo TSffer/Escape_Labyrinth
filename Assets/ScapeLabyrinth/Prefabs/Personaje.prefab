@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &6020291331888086961
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148358457382744384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 611b389ec3104a64997824b04e2f5a39, type: 3}
 --- !u!1 &4048620579886002038
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,9 +102,11 @@ MonoBehaviour:
   m_FootstepSounds:
   - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
-  tiempo: {fileID: 0}
+  canvastime: {fileID: 0}
+  canvaslife: {fileID: 0}
   target: {fileID: 0}
-  camerashake: {fileID: 0}
+  camera: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!82 &4048620579886002035
 AudioSource:
   m_ObjectHideFlags: 0
@@ -550,6 +566,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 611b389ec3104a64997824b04e2f5a39, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 611b389ec3104a64997824b04e2f5a39, type: 3}
       propertyPath: m_Controller
       value: 
@@ -559,6 +579,12 @@ PrefabInstance:
 --- !u!4 &148358457383103766 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 611b389ec3104a64997824b04e2f5a39,
+    type: 3}
+  m_PrefabInstance: {fileID: 148358457382713238}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &148358457382744384 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100054, guid: 611b389ec3104a64997824b04e2f5a39,
     type: 3}
   m_PrefabInstance: {fileID: 148358457382713238}
   m_PrefabAsset: {fileID: 0}

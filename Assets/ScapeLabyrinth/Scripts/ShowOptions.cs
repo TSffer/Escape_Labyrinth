@@ -11,7 +11,7 @@ public class ShowOptions : MonoBehaviour
     public GameObject panelMenu;
     public string sceneName = "";
     public AudioSource m_AudioSource;
-    public Animator animator;
+    //public Animator animator;
 
     void PauseGame()
     {
@@ -52,8 +52,8 @@ public class ShowOptions : MonoBehaviour
         Application.Quit();
     }
 
-    public void attack()
+    /*public void attack()
     {
         animator.SetTrigger("Attack");
-    }
+    }*/
 }

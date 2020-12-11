@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,14 +8,15 @@ public class EnemyIA : MonoBehaviour
 {
     NavMeshAgent nm;
     public Transform target;
-    public float distanceThreshold = 10f;
-    public enum AIState { idle, chasing, attack};
+    public float distanceThreshold = 25.0f;
+    public enum AIState { idle, chasing, attack, fall};
+    public float StunnedTime = 3.0f;
 
     public AIState aistate = AIState.idle;
 
     public Animator animator;
     public float attackThreshold = 1.5f;
-
+    private bool hit = false;
 
     void Start()
     {
@@ -26,6 +28,23 @@ public class EnemyIA : MonoBehaviour
    
     void Update()
     {
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            int NumberChildren = collision.transform.childCount;
+         
+            for (int n = 0; n < NumberChildren; n++)
+            {
+                if (collision.transform.GetChild(n).tag == "machete")
+                {
+                    Debug.Log("Exit called.");
+                    hit = true;
+                }
+            }
+        }
     }
 
     IEnumerator Think()
@@ -60,10 +79,25 @@ public class EnemyIA : MonoBehaviour
                 case AIState.attack:
                     nm.SetDestination(transform.position);
                     dist = Vector3.Distance(target.position, transform.position);
-                    if(dist > attackThreshold)
+                    //animator.SetBool("Falling", false);
+                    if (dist > attackThreshold)
                     {
                         aistate = AIState.chasing;
                         animator.SetBool("Attacking", false);
+                    }
+                    if(hit == true)
+                    {
+                        aistate = AIState.fall;
+                    }
+                    break;
+                case AIState.fall:
+                    animator.SetBool("Falling", true);
+                    StunnedTime -= Time.deltaTime;
+                    if (StunnedTime <= 0)
+                    {
+                        hit = false;
+                        aistate = AIState.attack;
+                        animator.SetBool("Falling", false);
                     }
                     break;
                 default:

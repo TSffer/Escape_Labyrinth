@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PanelOptions
   - enemy
+  - machete
+  - goal
   layers:
   - Default
   - TransparentFX
