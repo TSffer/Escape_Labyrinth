@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EnemyIA : MonoBehaviour
 {
@@ -12,14 +13,23 @@ public class EnemyIA : MonoBehaviour
     public enum AIState { idle, chasing, attack, fall};
     public float StunnedTime = 3.0f;
 
+    public PlayerController playercontroller;
+    public GoalSuccess[] goal;
     public AIState aistate = AIState.idle;
-
     public Animator animator;
     public float attackThreshold = 1.5f;
-    private bool hit = false;
+    public bool hit = false;
+    public AudioClip[] m_Sounds;
+    public AudioClip idlem_Sounds;
+    private AudioSource m_AudioSource;
+    private float m_StepCycle;
+    private float m_StepInterval;
 
     void Start()
     {
+        m_StepCycle = 0.0f;
+        m_StepInterval = 0.03f;
+        m_AudioSource = GetComponent<AudioSource>();
         nm = GetComponent<NavMeshAgent>();
         StartCoroutine(Think());
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -28,11 +38,34 @@ public class EnemyIA : MonoBehaviour
    
     void Update()
     {
+        ProgressSoundCycle();
+
+        for (int i = 0; i < goal.Length; i++)
+        {
+            if (goal[i].goalSuccess)
+            {
+                m_AudioSource.mute = true;
+            }
+        }
+    }
+
+    private void ProgressSoundCycle()
+    {
+        m_StepCycle = m_StepCycle + m_StepInterval;
+        if (m_StepCycle > 1.5f)
+        {
+            int n = Random.Range(1, m_Sounds.Length);
+            m_AudioSource.clip = m_Sounds[n];
+            m_AudioSource.PlayOneShot(m_AudioSource.clip);
+            m_Sounds[n] = m_Sounds[0];
+            m_Sounds[0] = m_AudioSource.clip;
+            m_StepCycle = 0.0f;
+        }
     }
 
     void OnCollisionStay(Collision collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && playercontroller.controlhit)
         {
             int NumberChildren = collision.transform.childCount;
          
@@ -40,10 +73,11 @@ public class EnemyIA : MonoBehaviour
             {
                 if (collision.transform.GetChild(n).tag == "machete")
                 {
-                    Debug.Log("Exit called.");
+                    Debug.Log("Hit player.");
                     hit = true;
                 }
             }
+            playercontroller.controlhit = false;
         }
     }
 
@@ -93,11 +127,23 @@ public class EnemyIA : MonoBehaviour
                 case AIState.fall:
                     animator.SetBool("Falling", true);
                     StunnedTime -= Time.deltaTime;
+                    //m_AudioSource.mute = true;
+                    
+                    m_StepCycle = m_StepCycle + m_StepInterval;
+                    if (m_StepCycle > 2.0f)
+                    {
+                        m_AudioSource.PlayOneShot(idlem_Sounds);
+                        m_StepCycle = 0.0f;
+                    }
+
+                    //m_AudioSource.PlayOneShot(m_AudioSource.clip);
                     if (StunnedTime <= 0)
                     {
-                        hit = false;
                         aistate = AIState.attack;
+                        hit = false;
+                        StunnedTime = 3.0f;
                         animator.SetBool("Falling", false);
+                        //m_AudioSource.mute = false;
                     }
                     break;
                 default:

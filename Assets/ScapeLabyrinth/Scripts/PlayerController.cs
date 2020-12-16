@@ -23,7 +23,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioClip m_LandSound;
     [SerializeField] private AudioClip[] m_FootstepSounds;
+    [SerializeField] private AudioClip[] m_HurtsSounds;
+    public AudioClip m_DeadPlayer;
+    public AudioClip m_PunchPlayer;
 
+    public EnemyIA enemiyia;
     private Rigidbody rb;
     private float m_StepCycle;
     private AudioSource m_AudioSource;
@@ -35,14 +39,19 @@ public class PlayerController : MonoBehaviour
     //private Animator animator;
     public Text canvastime;
     public Text canvaslife;
+    public Text canvaspoints;
     private float tmp = 0.0f;
+    public float tmpstun = 0.0f;
     private float tmplife = 100.0f;
-    private bool hit = false;
+    private float points = 0.0f;
+    private bool hit;
     //public AudioClip attackSound;
     public Transform target;
     public Camera camera;
     public GameObject enemy;
     public Animator animator;
+    public bool controlhit = false;
+    private float sleep = 0.0f;
 
     void Start()
     {
@@ -69,6 +78,13 @@ public class PlayerController : MonoBehaviour
 
         tmp += Time.deltaTime;
         canvastime.text = "Tiempo : " + tmp.ToString("f0") + " sec";
+        hit = enemiyia.hit;
+
+        if(hit == true)
+        {
+            tmpstun += Time.deltaTime;
+            canvaspoints.text = "Puntuación : " + tmpstun.ToString("f0");
+        }
 
         if(tmp >= 10.0f)
         {
@@ -81,9 +97,23 @@ public class PlayerController : MonoBehaviour
         }
 
         float dist = Vector3.Distance(target.position, transform.position);
-        if (dist < 3.0f && tmp >= 10.0f)
+
+        if (dist < 7  && dist > 3.0f && tmp >= 10.0f && hit == false)
         {
-            Handheld.Vibrate();
+            long[] myPattern = new long[] { 100L, 200L };
+            int repeatIndex = 5;
+            Vibration.Vibrate(myPattern, repeatIndex);
+
+            //Handheld.Vibrate();
+        }
+
+        if (dist < 3.0f && tmp >= 10.0f && hit == false)
+        {
+            long[] myPattern = new long[] {700L};
+            int repeatIndex = 5;
+            Vibration.Vibrate(myPattern, repeatIndex);
+
+            //Handheld.Vibrate();
         }
         
         if(tmplife >= 0.0f)
@@ -105,30 +135,41 @@ public class PlayerController : MonoBehaviour
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
             tmplife -= Time.deltaTime*10;
             canvaslife.text = "Salud : " + tmplife.ToString("f0");
+
+            m_StepCycle = m_StepCycle + m_StepInterval;
+
+            //m_NextStep = m_StepCycle + m_StepInterval;
+            if (m_StepCycle > 0.3f)
+            {
+                int n = Random.Range(1, m_HurtsSounds.Length);
+                m_AudioSource.clip = m_HurtsSounds[n];
+                m_AudioSource.PlayOneShot(m_AudioSource.clip);
+
+                m_HurtsSounds[n] = m_HurtsSounds[0];
+                m_HurtsSounds[0] = m_AudioSource.clip;
+                m_StepCycle = 0.0f;
+            }
+
             if (tmplife <= 0.0f)
             {
                 speed = 0.0f;
                 tmplife = 0.0f;
+                m_AudioSource.clip = m_DeadPlayer;
+                m_AudioSource.PlayOneShot(m_AudioSource.clip);
+
                 m_AudioSource.mute = true;
                 transform.rotation = Quaternion.Euler(80.0f, 0.0f, 0.0f);
                 camera.transform.rotation = Quaternion.Euler(-150.0f, 0.0f, 0.0f);
                 //Time.timeScale = 0;
-                SceneManager.LoadScene("Main_Scene");
+                sleep += Time.deltaTime;
+                //if(sleep >= 1)
+                //{
+                    SceneManager.LoadScene("Main_Scene");
+                    sleep = 0.0f;
+                //}
             }
         }
 
-    }
-
-    void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "enemy")
-        {
-            if (hit == true)
-            {
-                Debug.Log("Hit in player");
-                hit = false;
-            }
-        }
     }
 
     private void ProgressStepCycle(float speed)
@@ -151,7 +192,9 @@ public class PlayerController : MonoBehaviour
     public void attack()
     {
         animator.SetTrigger("Attack");
-        hit = true;
+        controlhit = true;
+        m_AudioSource.clip = m_PunchPlayer;
+        m_AudioSource.PlayOneShot(m_AudioSource.clip);
     }
 
     public Vector3 LowPassAccelerometer()

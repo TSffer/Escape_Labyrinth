@@ -3,27 +3,27 @@
 namespace SlimUI.ModernMenu{
     public class ExtraLinks : MonoBehaviour{
         public void CCP(){
-            Application.OpenURL("http://u3d.as/1JZG");
+            Application.OpenURL("https://ucsp.edu.pe/");
         }
 
         public void SciFi(){
-            Application.OpenURL("http://u3d.as/1AaR");
+            Application.OpenURL("https://www.amazon.com/-/es/");
         }
 
         public void Clean1(){
-            Application.OpenURL("http://u3d.as/1hTi");
+            Application.OpenURL("https://www.isur.edu.pe/");
         }
 
         public void Clean2(){
-            Application.OpenURL("http://u3d.as/1AQ0");
+            Application.OpenURL("https://www.intel.la/content/www/xl/es/homepage.html");
         }
 
         public void Essence(){
-            Application.OpenURL("http://u3d.as/1t11");
+            Application.OpenURL("https://www.nvidia.com/es-la/");
         }
 
         public void Tech(){
-            Application.OpenURL("http://u3d.as/1nki");
+            Application.OpenURL("https://ucsp.edu.pe/");
         }
     }
 }

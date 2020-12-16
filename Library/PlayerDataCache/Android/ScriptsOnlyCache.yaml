@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - ControlSystem
     - DoorAnimation
     - EZCameraShake.CameraShaker
     - EnemyIA
@@ -30,8 +31,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -118,27 +121,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11648}
     - Class: 114
-      Script: {instanceID: 11882}
+      Script: {instanceID: 11686}
     - Class: 114
-      Script: {instanceID: 11982}
+      Script: {instanceID: 11884}
     - Class: 114
-      Script: {instanceID: 12302}
+      Script: {instanceID: 11984}
     - Class: 114
-      Script: {instanceID: 12458}
+      Script: {instanceID: 12254}
     - Class: 114
-      Script: {instanceID: 12678}
+      Script: {instanceID: 12308}
     - Class: 114
-      Script: {instanceID: 12804}
+      Script: {instanceID: 12464}
     - Class: 114
-      Script: {instanceID: 12826}
+      Script: {instanceID: 12684}
     - Class: 114
-      Script: {instanceID: 13006}
+      Script: {instanceID: 12810}
     - Class: 114
-      Script: {instanceID: 13030}
+      Script: {instanceID: 12832}
     - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13012}
     - Class: 114
-      Script: {instanceID: 376984}
+      Script: {instanceID: 13036}
+    - Class: 114
+      Script: {instanceID: 13440}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -231,49 +236,49 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11550}
     - Class: 114
-      Script: {instanceID: 11758}
+      Script: {instanceID: 11760}
     - Class: 114
-      Script: {instanceID: 11838}
+      Script: {instanceID: 11840}
     - Class: 114
-      Script: {instanceID: 11882}
+      Script: {instanceID: 11884}
     - Class: 114
-      Script: {instanceID: 11982}
+      Script: {instanceID: 11984}
     - Class: 114
-      Script: {instanceID: 12018}
+      Script: {instanceID: 12020}
     - Class: 114
-      Script: {instanceID: 12064}
+      Script: {instanceID: 12066}
     - Class: 114
-      Script: {instanceID: 12208}
+      Script: {instanceID: 12210}
     - Class: 114
-      Script: {instanceID: 12548}
+      Script: {instanceID: 12554}
     - Class: 114
-      Script: {instanceID: 12620}
+      Script: {instanceID: 12626}
     - Class: 114
-      Script: {instanceID: 12692}
+      Script: {instanceID: 12698}
     - Class: 114
-      Script: {instanceID: 12706}
+      Script: {instanceID: 12712}
     - Class: 114
-      Script: {instanceID: 12776}
+      Script: {instanceID: 12782}
     - Class: 114
-      Script: {instanceID: 12926}
+      Script: {instanceID: 12932}
     - Class: 114
-      Script: {instanceID: 13006}
+      Script: {instanceID: 13012}
     - Class: 114
-      Script: {instanceID: 13160}
+      Script: {instanceID: 13166}
     - Class: 114
-      Script: {instanceID: 13194}
+      Script: {instanceID: 13200}
     - Class: 114
-      Script: {instanceID: 13310}
+      Script: {instanceID: 13316}
     - Class: 114
-      Script: {instanceID: 13318}
+      Script: {instanceID: 13324}
     - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13440}
     - Class: 114
-      Script: {instanceID: 13450}
+      Script: {instanceID: 13456}
     - Class: 114
-      Script: {instanceID: 278960}
+      Script: {instanceID: 1123612}
     - Class: 114
-      Script: {instanceID: 278962}
+      Script: {instanceID: 1123614}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -577,6 +582,12 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
+      Hash: c5e4d02dbf54ac6ac728b4217d66e5d0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ControlSystem
+  - hash:
+      serializedVersion: 2
       Hash: e540a01426f9ad59088593bf72bcd255
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
@@ -841,6 +852,12 @@ ScriptsOnlyBuild:
     className: ThirdPersonUserControl
   - hash:
       serializedVersion: 2
+      Hash: cd7b9b8675567270f711f30c6f13594e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GoalSuccess
+  - hash:
+      serializedVersion: 2
       Hash: a4d879eed97e8d86fd752672fc026fa2
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
@@ -877,7 +894,7 @@ ScriptsOnlyBuild:
     className: ScreenOverlay
   - hash:
       serializedVersion: 2
-      Hash: 7dc3c1fbe123e25b587fdc3432e33bc6
+      Hash: ea5a04d73946c3fc2505be9ab5c3a530
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyIA
@@ -1099,7 +1116,7 @@ ScriptsOnlyBuild:
     className: SimpleScript
   - hash:
       serializedVersion: 2
-      Hash: 85b2b89dca3a578a74ee1df5b31f4de4
+      Hash: e870c795dfdcdaf0caa377f88248e753
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -1487,12 +1504,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
-  - hash:
-      serializedVersion: 2
-      Hash: 9b4071cb9ea601a9308f9f295917c197
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GoalSuccess
   platform: 13
   scenePathNames:
   - Assets/ScapeLabyrinth/Scenes/Menu_Scene.unity
