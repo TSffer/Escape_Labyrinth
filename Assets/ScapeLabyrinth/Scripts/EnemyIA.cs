@@ -52,7 +52,7 @@ public class EnemyIA : MonoBehaviour
     private void ProgressSoundCycle()
     {
         m_StepCycle = m_StepCycle + m_StepInterval;
-        if (m_StepCycle > 1.5f)
+        if (m_StepCycle > 2.5f)
         {
             int n = Random.Range(1, m_Sounds.Length);
             m_AudioSource.clip = m_Sounds[n];
@@ -127,14 +127,14 @@ public class EnemyIA : MonoBehaviour
                 case AIState.fall:
                     animator.SetBool("Falling", true);
                     StunnedTime -= Time.deltaTime;
-                    //m_AudioSource.mute = true;
+                    m_AudioSource.mute = true;
                     
-                    m_StepCycle = m_StepCycle + m_StepInterval;
-                    if (m_StepCycle > 2.0f)
+                    /*m_StepCycle = m_StepCycle + m_StepInterval;
+                    if (m_StepCycle > 2.5f)
                     {
                         m_AudioSource.PlayOneShot(idlem_Sounds);
                         m_StepCycle = 0.0f;
-                    }
+                    }*/
 
                     //m_AudioSource.PlayOneShot(m_AudioSource.clip);
                     if (StunnedTime <= 0)
@@ -143,7 +143,7 @@ public class EnemyIA : MonoBehaviour
                         hit = false;
                         StunnedTime = 3.0f;
                         animator.SetBool("Falling", false);
-                        //m_AudioSource.mute = false;
+                        m_AudioSource.mute = false;
                     }
                     break;
                 default:

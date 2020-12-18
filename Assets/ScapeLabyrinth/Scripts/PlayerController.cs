@@ -98,20 +98,18 @@ public class PlayerController : MonoBehaviour
 
         float dist = Vector3.Distance(target.position, transform.position);
 
-        if (dist < 7  && dist > 3.0f && tmp >= 10.0f && hit == false)
+        if (dist < 7.0f  && dist > 3.0f && tmp >= 10.0f && hit == false)
         {
-            long[] myPattern = new long[] { 100L, 200L };
-            int repeatIndex = 5;
-            Vibration.Vibrate(myPattern, repeatIndex);
-
+            long[] pattern = { 0, 1000, 1000};
+            Vibration.Vibrate(100);
+          
             //Handheld.Vibrate();
         }
 
         if (dist < 3.0f && tmp >= 10.0f && hit == false)
         {
-            long[] myPattern = new long[] {700L};
-            int repeatIndex = 5;
-            Vibration.Vibrate(myPattern, repeatIndex);
+            long[] pattern = {1000, 1000 };
+            Vibration.Vibrate(500);
 
             //Handheld.Vibrate();
         }
